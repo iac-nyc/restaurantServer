@@ -40,7 +40,8 @@ exports.jwtPassport = passport.use(new JwtStrategy(opts,
 
 exports.verifyUser = passport.authenticate('jwt', {session: false});
 
-exports.verifyAdmin = function (req, res, next) {
+exports.verifyAdmin = passport.authenticate('jwt', {session: false});
+    function verifyAdmin(req, res, next) {
     User.findOne({ _id: req.user._id })
         .then((user) => {
             console.log("User: ", req.user);
